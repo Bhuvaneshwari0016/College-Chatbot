@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karpagam College of Engineering - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="https://kce.ac.in/new/wp-content/uploads/2024/09/KCE-2024-LOGO.png" alt="Karpagam College of Engineering Logo">
+        </div>
+        <div class="timestamp" id="timestamp">
+            <!-- Current timestamp will appear here -->
+        </div>
+    </div>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-container">
+                <label for="rollno">Roll No</label>
+                <input type="text" id="rollno" name="rollno" required minlength="4" pattern="[A-Za-z0-9]+" title="Roll number must be alphanumeric and at least 4 characters long">
+            </div>
+            <div class="input-container">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required minlength="6" title="Password must be at least 6 characters long">
+            </div>
+            <button type="submit" class="login-btn"><a href="index.html">Login</a></button>
+        </form>
+    </div>
+
+    <script>
+        // Function to display the current date and time
+        function updateTimestamp() {
+            const now = new Date();
+            const date = now.toLocaleDateString('en-GB'); // Format: DD/MM/YYYY
+            const time = now.toLocaleTimeString(); // Format: HH:MM:SS AM/PM
+            document.getElementById('timestamp').innerHTML = `${date} , ${time}`;
+        }
+
+        // Update timestamp on page load and every second
+        updateTimestamp();
+        setInterval(updateTimestamp, 1000);
+
+        // JavaScript for form validation
+        const form = document.getElementById('loginForm');
+
+        form.addEventListener('submit', function(event) {
+            const rollNo = document.getElementById('rollno').value;
+            const password = document.getElementById('password').value;
+
+            // Additional custom validation if needed
+            if (rollNo === '' || password === '') {
+                alert('Please fill out all fields.');
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+
+            if (!/^[A-Za-z0-9]+$/.test(rollNo)) {
+                alert('Roll number must be alphanumeric.');
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+
+            // If all validation passes, the form will be submitted
+        });
+    </script>
+</body>
+</html>
